@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AlphaBlog</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>My Blog</title>
+     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,6 +11,9 @@
   </head>
 
   <body>
+    <%= render 'layouts/navigation' %> 
+    <%= render 'layouts/message' %>
     <%= yield %>
-  </body>
+    <%= render 'layouts/footer' %> 
+    </body>
 </html>
