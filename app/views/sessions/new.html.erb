@@ -1,0 +1,31 @@
+<div id="page-content">
+  <div class = "container">
+  <h1 class="text-center mt-4">Sign In for My Blog</h1>
+    <br>
+    <br>
+      <div class="row justify-content-center">
+         <div class="col-10">
+             
+          <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+          <div class="form-group row">
+              <%= f.label :email, class:"col-sm-2 col-form-label"%> 
+              <div class="col-sm-10">
+              <%= f.email_field :email, class:"form-control" ,  placeholder: "Enter your email address"%> 
+              </div>
+          </div>
+          <div class="form-group row">
+              <%= f.label :password, class:"col-sm-2 col-form-label"%> 
+              <div class="col-sm-10">
+              <%= f.password_field :password, class:"form-control" ,  placeholder: "Enter your password"%> 
+              </div>
+          </div>
+          <div class="form-group row justify-content-center">
+              <%= f.submit "Log In" , class: "btn btn btn-success" %> 
+            </div>
+          <% end %>
+          <div class = "mb-3">
+            <%= link_to 'Return to articles listing', articles_path,  class:"text-info col-2"  %> 
+        </div>
+    </div>
+  </div>
+</div>
