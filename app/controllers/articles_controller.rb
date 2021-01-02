@@ -1,4 +1,7 @@
 class ArticlesController < ApplicationController
+  before_action :require_user, except: [:show, :index]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
+
 
   def show
     @article = Article.find(params[:id])
@@ -18,8 +21,8 @@ class ArticlesController < ApplicationController
   end
   
   def create
-        @article = Article.new(params.require(:article).permit(:title, :description))
-        @article.user = User.first
+        @article = Article.new(params.require(:article).permit(:title, :description, :image))
+        @article.user = current_user
         if @article.save
             flash[:notice] = "Article is successfully created"
             redirect_to @article
@@ -31,7 +34,7 @@ class ArticlesController < ApplicationController
   
   def update
         @article = Article.find(params[:id])
-        if @article.update(params.require(:article).permit(:title, :description))
+        if @article.update(params.require(:article).permit(:title, :description, :image))
             flash[:notice] = "Article is updated successfully."
             redirect_to @article
         else
@@ -43,6 +46,15 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
     redirect_to articles_path
+  end
+  
+  private
+  
+  def require_same_user
+    if current_user != Article.find(params[:id]).user && !current_user.admin?
+      flash[:alert] = "You can only edit or delete your own article"
+      redirect_to Article.find(params[:id])
+    end
   end
   
 end

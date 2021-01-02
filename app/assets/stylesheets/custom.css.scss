@@ -1,10 +1,9 @@
 .navbar {
-    background-color: black !important;
+    background-color: #8b0000 !important;
 }
 .nav-link {
   color: white !important;
 }
-
 #logo {
   float: left;
   font-size: 1.7em;
@@ -66,3 +65,47 @@ body {
     color: black; }
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
+
+
+#container1{
+    width:1000px;
+    height:400px;
+    overflow-x:hidden;
+}
+
+#parent {
+    width:6000px;
+}
+.contentBlock {
+    height:350px;
+    width:300px;
+    margin:10px;
+    border:1px ridge grey;
+    float:left;
+    box-shadow: 2px 3px;
+}
+.panner {
+    
+}
+.active {
+    color:red;
+}
+
+.text-desc1
+{
+  font-size:1em;
+  text-align:left;
+  
+}
+
+.footer11 {
+   background-color: #D3D3D3;
+   color: black;
+   text-align: left;
+}
+.image1{
+  width:94%;
+  height: 200px;
+}
+
+
