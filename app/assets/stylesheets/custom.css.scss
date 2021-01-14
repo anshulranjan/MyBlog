@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #8b0000 !important;
+    background-color: #000000 !important;
 }
 .nav-link {
   color: white !important;
@@ -18,11 +18,11 @@
 }
 
 .jumbotron {
-  background-image: asset-url('green-chameleon.jpg');
+  background-image: url('/assets/blogimage.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 425px;
+  height: 540px;
 }
 
 html,
@@ -107,5 +107,55 @@ body {
   width:94%;
   height: 200px;
 }
+.img-responsive
+{
+  width:100%;
+  height: 500px;
+}
+
+.post-preview {
+  color: #212529;
+}
+
+.post-preview:hover {
+  text-decoration: none;
+  
+}
+
+.post-title {
+  font-size: 35px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.p11{
+  color: #000000;
+}
+.p11:hover
+{
+  color: #0085A1;
+  text-decoration: none;
+}
+
+.post-subtitle {
+  font-weight: 350;
+  margin: 0 0 10px;
+  font-size: 20px;
+  
+}
+
+.post-meta {
+  font-size: 18px;
+  font-style: italic;
+  margin-top: 0;
+  color: #787878;
+}
 
 
+
+@media only screen and (min-width: 768px) {
+  .post-preview > a > .post-title {
+    font-size: 36px;
+  }
+}

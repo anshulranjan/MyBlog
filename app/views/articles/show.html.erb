@@ -1,28 +1,100 @@
-<div id="page-content">
-  <h1 class="text-center mt-4"><%= @article.title %></h1>
 <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-8 mt-4">
-        <div class="card text-center shadow mb-5 bg-white rounded">
-          <div class="card-header font-italic">
-            by <%= @article.user.username if @article.user %>
-            <%= link_to gravatar_for(@article.user), user_path(@article.user) %>
-          </div>
-          <div class="card-body">
-            <div class="card-text text-left"><%= simple_format(@article.description) %></div>
-            <% if logged_in? && (@article.user == current_user || current_user.admin?) %>
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4"><%= @article.title %></h1>
+
+        <!-- Author -->
+        <p class="lead">
+          by
+          <%= link_to @article.user.username, user_path(@article.user) if @article.user %>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Created <%= time_ago_in_words(@article.created_at) %> ago | Edited <%= time_ago_in_words(@article.updated_at) %> ago</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <%= image_tag(@article.image, class:"img-responsive")%>
+
+        <hr>
+
+        <!-- Post Content -->
+        
+
+        <%= simple_format(@article.description) %>
+        <% if logged_in? && (@article.user == current_user || current_user.admin?) %>
             <%= link_to "Edit", edit_article_path(@article), class: "btn btn-outline-info" %>
             <%= link_to "Delete", article_path(@article), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
-            <% end %>
-          </div>
-          <div class="card-footer text-muted">
-            <small>Created <%= time_ago_in_words(@article.created_at) %> ago, 
-            edited <%= time_ago_in_words(@article.updated_at) %> ago</small>
+        <% end %>
+        
+        <hr>
+
+        <!-- Comments Form -->
+        <div class="card my-4">
+          <h5 class="card-header">Leave a Comment:</h5>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
         </div>
+
+        <!-- Single Comment -->
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">Commenter Name</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+          </div>
+        </div>
+
+        <!-- Comment with nested comments -->
+        
+
       </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        
+        
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">New Articles</h5>
+          <div class="card-body">
+            <% count = 0 %>
+            <% @articlenew.each do |article| %>
+              <% count = count+1 %>
+              <% break if count>3 %>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"><%= article.title %></h5>
+                <h6 class="card-subtitle mb-2 text-muted"><small>Created <%= time_ago_in_words(article.created_at) %> ago</small></h6>
+                <p class="card-text"><%= truncate(article.description, length: 150) %></p>
+                <a href="#" class="card-link"><%= link_to "Read More", article_path(article) %></a>
+                </div>
+              </div>
+              <br>
+            <% end %>
+            <%= link_to 'View all Articles', articles_path,  class:"btn btn-primary"  %> 
+          </div>
+        </div>
+
+      </div>
+
     </div>
+    <!-- /.row -->
+
   </div>
-</div>
-
-

@@ -5,6 +5,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @articlenew = Article.order("created_at DESC")
   end
   
   def index
@@ -15,6 +16,7 @@ class ArticlesController < ApplicationController
       @article = Article.new
       
   end
+  
   
   def edit
       @article = Article.find(params[:id])
@@ -47,6 +49,7 @@ class ArticlesController < ApplicationController
     @article.destroy
     redirect_to articles_path
   end
+  
   
   private
   

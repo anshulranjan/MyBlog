@@ -1,72 +1,42 @@
 <div id="page-content">
-    <% if logged_in? %>
+      <div class="jumbotron jumbotron-fluid text-center text bold">
         <div class="container" id="home-container">
-          <div class="card bg-light shadow mb-5 bg-white rounded">
-            <h1 class="card-header text-center">All Articles</h1>
-            <div id="container1">
-                <% @articles.each do |article| %>
-                    
-                      <div id="parent">
-                        <div class="contentBlock">
-                          <%= image_tag(article.image, class:"image1 ml-2")%>
-                          <h5 class="card-title ml-2 mt-2"><%= link_to article.title, article_path(article) %></h5>
-                          <div class = "text-desc1 mb-2 ml-2"><%= truncate(article.description, length: 30) %></div>
-                          <div class="class-text">
-                            <small class="text-muted ml-2">Updated <%= time_ago_in_words(article.updated_at) %></small>
-                          </div>
-                        </div>
-                      </div>
-                <% end %>
-            </div>
-            <div class = "row justify-content-md-center">
-              <div class = "col-6 col-md-4"></div>
-              <div class="col-6 col-md-4">
-                <button id="panLeft" class="btn btn-outline-secondary mb-3" data-scroll-modifier='-1'><<</button>
-                <button id="panRight" class="btn btn-outline-secondary mb-3" data-scroll-modifier='1'>>></button>
-              </div>
-              <div class="col-6 col-md-4">
-                <%= link_to '[View all articles]', articles_path,  class:"text-info col-2"  %> 
-              </div>
-            </div>
-        </div>
-      </div>
-    <% else %>
-      <div class="container" id="home-container">
-      <div class="jumbotron text-center text bold">
-        <h1 class="display-4 font-weight-bold">My Blog</h1>
-        <p class="lead font-weight-bold" >This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <h1 class="display-4 font-weight-bold text-white">My Blog</h1>
+        <p class="lead font-weight-bold text-white" >This is a clear and simple Blog.</p>
         <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <%= link_to "Sign up!", signup_path, class: "btn btn-success btn-lg" %>
+        <p class="text-white">Why wait to publish your feelings?</p>
+        <% if logged_in? %>
+          <%= link_to "View Profile", user_path(current_user), class: "btn btn-success btn-lg" %>
+        <% else %>
+          <%= link_to "Sign up!", signup_path, class: "btn btn-success btn-lg" %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+      </div>
+       <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <% count = 0 %>
+              <% @articles.each do |article| %>
+                <% count = count+1 %>
+                <% break if count>=6 %>
+                <div class="post-preview">
+                    <h2 class="post-title">
+                      <%= link_to article.title, article_path(article), class:"p11" %>
+                    </h2>
+                    <h3 class="post-subtitle">
+                      <%= truncate(article.description, length: 300) %>
+                    </h3>
+                  <p class="post-meta">Posted by
+                    <%= link_to article.user.username, user_path(article.user) if article.user %> | Uploaded 
+                    <%= time_ago_in_words(article.created_at) %> ago</p>
+                </div>
+                <hr>
+              <% end %>
+              <!-- Pager -->
+              <div class="clearfix">
+                <%= link_to 'View all Articles', articles_path,  class:"btn btn-primary float-right mb-4"  %> 
+              </div>
+            </div>
+          </div>
+        </div>
 </div>
-<script>
-  var button = document.getElementById('panRight');
-  button.onclick = function () {
-    var container = document.getElementById('container1');
-    sideScroll(container,'right',25,400,10);
-  };
-  var back = document.getElementById('panLeft');
-  back.onclick = function () {
-    var container = document.getElementById('container1');
-    sideScroll(container,'left',25,400,10);
-  };
-
-  function sideScroll(element,direction,speed,distance,step){
-    var scrollAmount = 0;
-    var slideTimer = setInterval(function(){
-        if(direction == 'left'){
-            element.scrollLeft -= step;
-        } else {
-            element.scrollLeft += step;
-        }
-        scrollAmount += step;
-        if(scrollAmount >= distance){
-            window.clearInterval(slideTimer);
-        }
-    }, speed);
-  }
-  
-</script>
