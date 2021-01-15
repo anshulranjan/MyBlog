@@ -7,6 +7,9 @@
 
         <!-- Title -->
         <h1 class="mt-4"><%= @article.title %></h1>
+        <% if @article.categories.any? %>
+            <div class="mt-2"><%= render @article.categories %></div> 
+          <% end %>
 
         <!-- Author -->
         <p class="lead">

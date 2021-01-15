@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
+    @articles = @user.articles.order("created_at DESC").paginate(page: params[:page], per_page: 5)
 
   end
   
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     @user.destroy
     session[:user_id] = nil if @user == current_user
     flash[:notice] = "Account and all associated articles successfully deleted"
-    redirect_to root_path
+    redirect_to users_path
   end
   
   
