@@ -10,4 +10,9 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   resources :categories, except: [:destroy]
   get '/search' => 'pages#search', :as => 'search_page'
+  resources :articles do
+    resources :comments, only: [:show, :index , :new, :create, :edit, :update]
+  end
+  resources :comments, only: [:destroy]
+  
 end

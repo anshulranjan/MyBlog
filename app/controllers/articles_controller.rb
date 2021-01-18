@@ -6,6 +6,9 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @articlenew = Article.order("created_at DESC")
+    @comments = @article.comments
+    @comment = Comment.new
+    @comment.article_id = @article.id
   end
   
   def index
@@ -15,7 +18,6 @@ class ArticlesController < ApplicationController
   
   def new
       @article = Article.new
-      
   end
   
   

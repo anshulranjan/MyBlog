@@ -1,0 +1,11 @@
+<div class="card my-4">
+    <h5 class="card-header">Leave a Comment:</h5>
+    <div class="card-body">
+        <%= form_for [ @article, @comment ] do |f| %>
+            <div class="form-group">
+                  <%= f.text_area :body, class: "form-control" %>
+            </div>
+             <%= f.submit 'Submit', :class => 'btn btn-primary', :name => nil %>
+        <% end %>
+    </div>
+</div>
