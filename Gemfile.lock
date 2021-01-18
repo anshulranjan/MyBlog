@@ -202,6 +202,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -227,7 +228,7 @@ DEPENDENCIES
   will_paginate (~> 3.1.0)
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.7.2p137
 
 BUNDLED WITH
    2.2.3
